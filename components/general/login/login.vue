@@ -1,41 +1,41 @@
 <template>
-  <section class="sing-up pt-md-20 pt-18 pb-md-20 pb-10" :data-cms-bind="dataBinding">
+  <section class="sing-up pt-md-20 pt-18 pb-md-20 pb-10">
     <div class="container">
       <div class="row">
         <div class="col-xxl-7 col-lg-8 mx-auto">
           <div class="sing-up-body">
-            <h2>
-              {{ block.title}}
+            <h2 data-editable="text" data-prop="title">
+              {{ title}}
             </h2>
             <form class="sing-up-items row gy-4 gx-3">
               <div class="col-md-12">
-                <label for="fullName" class="form-label">{{block.fullname.heading}}</label>
-                <input type="text" class="form-control" id="fullName" :placeholder="block.fullname.placeholder">
+                <label for="fullName" class="form-label" data-editable="text" data-prop="fullname.heading">{{fullname.heading}}</label>
+                <input type="text" class="form-control" id="fullName" :placeholder="fullname.placeholder">
               </div>
               <div class="col-md-12">
-                <label for="pEmailId" class="form-label">{{block.email.heading}}</label>
-                <input type="email" class="form-control" id="pEmailId" :placeholder="block.email.placeholder">
+                <label for="pEmailId" class="form-label" data-editable="text" data-prop="email.heading">{{email.heading}}</label>
+                <input type="email" class="form-control" id="pEmailId" :placeholder="email.placeholder">
               </div>
               <div class="col-6">
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" id="gridCheck">
                   <label class="form-check-label" for="gridCheck">
-                    {{block.checkbox_text}}
+                    <editable-text data-prop="checkbox_text">{{checkbox_text}}</editable-text>
                   </label>
                 </div>
               </div>
               <div class="col-6">
                 <div class="form-check ps-0  text-end">
                   <label class="form-check-label" for="gridCheck">
-                    <a href="#" class="forget-password"> Forget Password</a>
+                    <a :href="forgot_password_button.link" class="forget-password"><editable-text data-prop="forgot_password_button.text">{{ forgot_password_button.text }}</editable-text></a>
                   </label>
                 </div>
               </div>
               <div class="col-md-12">
-                <button type="submit" class="btn btn-submit  w-100">{{block.log_in_button.text}}</button>
+                <button type="submit" class="btn btn-submit  w-100"><editable-text data-prop="log_in_button.text">{{log_in_button.text}}</editable-text></button>
               </div>
               <div class="col-md-12 mt-3">
-                <label for="" class="d-block text-center mb-0">or</label>
+                <label for="" class="d-block text-center mb-0" data-editable="text" data-prop="divider_text">{{ divider_text }}</label>
               </div>
               <div class="col-md-6 mt-3">
                 <button type="submit" class="btn btn-submit btn-social w-100">
@@ -62,7 +62,7 @@
                       d="M12.9339 6.08805C13.1513 6.25109 13.4555 6.22932 13.6402 6.03372L15.9657 3.71916C16.0635 3.61053 16.1287 3.46927 16.1178 3.3171C16.1069 3.16494 16.0417 3.01288 15.9222 2.91504C14.2705 1.52417 12.1624 0.727295 10 0.727295V5.11011C11.0649 5.11011 12.0755 5.44697 12.9339 6.08805Z"
                       fill="white" />
                   </svg>
-                  Sign In with Google</button>
+                  <editable-text data-prop="google_button_text">{{ google_button_text }}</editable-text></button>
               </div>
               <div class="col-md-6 mt-3">
                 <button type="submit" class="btn btn-submit btn-social w-100">
@@ -71,11 +71,11 @@
                       d="M11.9 28.9508V19.0996H8.19995V14.6996H12V11.4996C12 7.59961 14.4 5.59961 17.7 5.59961C19.3 5.59961 20.7 5.69961 21.1 5.79961V9.79961H18.7999C16.9 9.69961 16.5 10.5996 16.5 11.7996V14.5996H21L20.4 18.9996H16.5V29.0775C23.6656 28.1463 29.2 22.0195 29.2 14.6C29.2 6.53664 22.6634 0 14.6 0C6.53664 0 0 6.53664 0 14.6C0 21.7409 5.12653 27.6844 11.9 28.9508Z"
                       fill="white" />
                   </svg>
-                  Sign In with FB</button>
+                  <editable-text data-prop="facebook_button_text">{{ facebook_button_text }}</editable-text></button>
               </div>
               <div class="divider mt-9"></div>
               <div class="col-md-12">
-                <a :href="block.sign_up_button.link" class="create-account">{{block.sign_up_button.text}}</a>
+                <a :href="sign_up_button.link" class="create-account"><editable-text data-prop="sign_up_button.text">{{sign_up_button.text}}</editable-text></a>
               </div>
               </form>
           </div>
@@ -86,8 +86,9 @@
 </template>
 <script>
    export default {
+      inheritAttrs: false,
       props: [
-         'block','dataBinding'
+         'title', 'fullname', 'email', 'checkbox_text', 'forgot_password_button', 'log_in_button', 'divider_text', 'google_button_text', 'facebook_button_text', 'sign_up_button'
       ]
    }
 </script>

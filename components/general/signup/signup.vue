@@ -1,31 +1,31 @@
 <template>
-   <section class="sing-up pt-md-20 pt-18 pb-md-20 pb-10" :data-cms-bind="dataBinding">
+   <section class="sing-up pt-md-20 pt-18 pb-md-20 pb-10">
       <div class="container">
          <div class="row">
             <div class="col-lg-7 mx-auto">
                <div class="sing-up-body">
-                  <h2>{{block.title}}</h2>
+                  <h2 data-editable="text" data-prop="title">{{title}}</h2>
                   <form class="sing-up-items row gy-4 gx-3">
                      <div class="col-md-12">
-                        <label for="fullName" class="form-label">{{block.form.fullname.heading}}</label>
+                        <label for="fullName" class="form-label" data-editable="text" data-prop="form.fullname.heading">{{form.fullname.heading}}</label>
                         <input
                            type="text"
                            class="form-control"
                            id="fullName"
-                           :placeholder="block.form.fullname.placeholder"
+                           :placeholder="form.fullname.placeholder"
                         />
                      </div>
                      <div class="col-md-12">
-                        <label for="pEmailId" class="form-label">{{block.form.email.heading}}</label>
+                        <label for="pEmailId" class="form-label" data-editable="text" data-prop="form.email.heading">{{form.email.heading}}</label>
                         <input
                            type="email"
                            class="form-control"
                            id="pEmailId"
-                           :placeholder="block.form.email.placeholder"
+                           :placeholder="form.email.placeholder"
                         />
                      </div>
                      <div class="col-md-12">
-                        <label for="setpassword" class="form-label">{{block.form.password.heading}}</label>
+                        <label for="setpassword" class="form-label" data-editable="text" data-prop="form.password.heading">{{form.password.heading}}</label>
                         <div class="input-group input-group-password">
                            <input
                               type="password"
@@ -39,8 +39,8 @@
                         </div>
                      </div>
                      <div class="col-md-12">
-                        <label for="Re-password" class="form-label"
-                           >{{block.form.retype_password.heading}}</label
+                        <label for="Re-password" class="form-label" data-editable="text" data-prop="form.retype_password.heading"
+                           >{{form.retype_password.heading}}</label
                         >
                         <div class="input-group input-group-password">
                            <input
@@ -58,15 +58,15 @@
                         <div class="form-check">
                            <input class="form-check-input" type="checkbox" id="gridCheck" />
                            <label class="form-check-label pe-0 pe-lg-14" for="gridCheck">
-                              {{block.form.checkbox_text}}
+                              <editable-text data-prop="form.checkbox_text">{{form.checkbox_text}}</editable-text>
                            </label>
                         </div>
                      </div>
                      <div class="col-md-12">
-                        <button type="submit" class="btn btn-submit w-100">{{block.form.sign_up_text}}</button>
+                        <button type="submit" class="btn btn-submit w-100"><editable-text data-prop="form.sign_up_text">{{form.sign_up_text}}</editable-text></button>
                      </div>
                      <div class="col-md-12 mt-3">
-                        <label for="" class="d-block text-center mb-0">or</label>
+                        <label for="" class="d-block text-center mb-0" data-editable="text" data-prop="form.divider_text">{{ form.divider_text }}</label>
                      </div>
                      <div class="button-group">
                      <button type="submit" class="btn btn-submit btn-social w-100">
@@ -106,7 +106,7 @@
                               fill="white"
                            />
                         </svg>
-                        Sign In with Google
+                        <editable-text data-prop="form.google_button_text">{{ form.google_button_text }}</editable-text>
                      </button>
                      <button type="submit" class="btn btn-submit btn-social w-100">
                         <svg
@@ -123,13 +123,13 @@
                               fill="white"
                            />
                         </svg>
-                        Sign In with FaceBook
+                        <editable-text data-prop="form.facebook_button_text">{{ form.facebook_button_text }}</editable-text>
                      </button>
                   </div>
                      <div class="divider mt-9"></div>
                      <div class="col-md-12">
-                        <a :href="block.form.log_in_button.link" class="create-account">
-                           {{ block.form.log_in_button.text}}
+                        <a :href="form.log_in_button.link" class="create-account">
+                           <editable-text data-prop="form.log_in_button.text">{{ form.log_in_button.text}}</editable-text>
                         </a>
                      </div>
                   </form>
@@ -141,8 +141,9 @@
 </template>
 <script>
    export default {
+      inheritAttrs: false,
       props: [
-         'block','dataBinding'
+         'title', 'form'
       ]
    }
 </script>

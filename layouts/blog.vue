@@ -5,8 +5,8 @@
                 <div class="row">
                     <div class="col-xl-8 col-lg-10 mx-auto">
                         <div class="blog-hero-content">
-                            <h1 class="blog-hero-title">{{ pageData.title }}</h1>
-                            <p>{{ pageData.description }}</p>
+                            <h1 class="blog-hero-title" data-editable="text" data-prop="title">{{ pageData.title }}</h1>
+                            <p data-editable="text" data-prop="description">{{ pageData.description }}</p>
                         </div>
                     </div>
                 </div>

@@ -1,10 +1,10 @@
 <template>
-   <section class="privacy-hero" :data-cms-bind="dataBinding">
+   <section class="privacy-hero">
       <div class="container">
          <div class="row">
             <div class="col-md-12">
                <div class="privacy-hero-content text-center">
-                  <h1>{{ block.title}}</h1>
+                  <h1 data-editable="text" data-prop="title">{{ title}}</h1>
                </div>
             </div>
          </div>
@@ -13,8 +13,9 @@
 </template>
 <script>
    export default {
+      inheritAttrs: false,
       props: [
-         'block','dataBinding'
+         'title'
       ]
    }
 </script>

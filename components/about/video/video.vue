@@ -1,23 +1,23 @@
 <template>
-   <section class="works" :data-cms-bind="dataBinding">
+   <section class="works">
       <div class="container">
          <div class="row align-items-center">
             <div class="col-lg-6">
                <div class="works-content">
-                  <h2>{{ block.title }}</h2>
-                  <p v-html="block.description"></p>
-                  <a :href="block.button.link" class="btn btn-lg btn-white" target="_blank"> {{block.button.text}} </a>
+                  <h2 data-editable="text" data-prop="title">{{ title }}</h2>
+                  <p data-editable="text" data-type="text" data-prop="description" v-html="description"></p>
+                  <a :href="button.link" class="btn btn-lg btn-white" target="_blank"> <editable-text data-prop="button.text">{{button.text}}</editable-text> </a>
                </div>
             </div>
             <div class="col-lg-6">
                <div class="works-banner">
-                  <img format="webp" :src="block.video.image" class="w-100" alt="banner-image" loading="lazy" style="border-radius:20px" v-if="block.video.image"/>
+                  <img format="webp" :src="video.image" class="w-100" :alt="video.image_alt" loading="lazy" style="border-radius:20px" v-if="video.image" data-editable="image" data-prop-src="video.image" data-prop-alt="video.image_alt"/>
                   <div class="effect">
                      <img src="~/assets/images/works/effect.png" alt="effect" loading="lazy" />
                   </div>
                   <div class="video-iframe d-flex align-items-center justify-content-center">
                      <div class="video-icon me-sm-9 me-8">
-                        <a class="popup-vimeo" :href="block.video.link">
+                        <a class="popup-vimeo" :href="video.link">
                            <svg
                               width="28"
                               height="32"
@@ -42,9 +42,9 @@
 
 <script>
    export default {
+      inheritAttrs: false,
       props: [
-         'block','dataBinding'
-
+         'title', 'description', 'button', 'video'
       ]
    }
 </script>

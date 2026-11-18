@@ -1,0 +1,26 @@
+label: Privacy Hero
+description: Hero section with a title only
+icon: lock
+tags:
+  - hero
+picker_preview:
+  text:
+    - Privacy Hero
+  icon:
+    - lock
+preview:
+  text:
+    - key: title
+    - Privacy Hero
+  subtext:
+    - Privacy Hero
+  icon:
+    - lock
+value:
+  _type: privacy/hero
+  title: Terms & Condition
+_inputs:
+  _type:
+    hidden: true
+  title:
+    type: text

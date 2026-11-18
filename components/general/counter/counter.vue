@@ -1,29 +1,27 @@
 <template>    
    <section
-      :class="classObject(block.alternate_style)"
-      id="counter-up"
-      :data-cms-bind="dataBinding"      
-   >
+      :class="classObject(alternate_style)"
+      id="counter-up">
       <div class="container">
          <div class="row">
             <div class="col-lg-12">
                <div class="section-header">
                   <h2>
-                     {{ block.title }} <span>{{ block.title_suffix }}</span>
+                     <editable-text data-prop="title">{{ title }}</editable-text> <span data-editable="text" data-prop="title_suffix">{{ title_suffix }}</span>
                   </h2>
-                  <p v-html="block.description"></p>
+                  <p data-editable="text" data-type="text" data-prop="description" v-html="description"></p>
                </div>
             </div>
             <div class="col-12">
-               <div class="counter-up-wrapper d-grid">
-                  <div class="counter-up-content" v-for="item in block.numbers">
+               <div class="counter-up-wrapper d-grid" data-editable="array" data-prop="numbers" data-direction="row">
+                  <div class="counter-up-content" v-for="item in numbers" data-editable="array-item">
                      <div class="counter-up-content-item">
                         <div class="counter-percent">
-                           <span class="percent" v-if="item.prefix">{{ item.prefix }}</span>
-                           <span class="counter">{{ item.number }}</span>
-                           <span class="percent" v-if="item.suffix">{{ item.suffix }}</span>
+                           <span class="percent" v-if="item.prefix" data-editable="text" data-prop="prefix">{{ item.prefix }}</span>
+                           <span class="counter" data-editable="text" data-prop="number">{{ item.number }}</span>
+                           <span class="percent" v-if="item.suffix" data-editable="text" data-prop="suffix">{{ item.suffix }}</span>
                         </div>
-                        <p>{{ item.text }}</p>
+                        <p data-editable="text" data-prop="text">{{ item.text }}</p>
                      </div>
                   </div>
                </div>
@@ -34,8 +32,9 @@
 </template>
 <script>
    export default {
+      inheritAttrs: false,
       props: [
-         'block','dataBinding'
+         'title', 'title_suffix', 'description', 'alternate_style', 'numbers'
       ],
       methods: {
       classObject(altStyle) {

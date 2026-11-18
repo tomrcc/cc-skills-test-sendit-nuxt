@@ -1,0 +1,9 @@
+description:
+  type: html
+  options:
+    bold: true
+    italic: true
+    link: true
+    removeformat: true
+    undo: true
+    redo: true

@@ -6,14 +6,14 @@
           <div class="col-lg-12">
             <article class="blog-single">
               <div class="inner-blog-details">
-                <h2 class="w-xxl-70 w-xl-80 w-100">{{ pageData.title }}</h2>
+                <h2 class="w-xxl-70 w-xl-80 w-100" data-editable="text" data-prop="title">{{ pageData.title }}</h2>
                 <div class="inner-blog-details-meta">
                   <ul class="list-unstyled">
                     <li class="list-inline-item">
                       <p>{{ blogDate }}</p>
                     </li>
                     <li class="list-inline-item">
-                      <p><span> Written by: &nbsp;</span>{{ pageData.author }}</p>
+                      <p><span><editable-text :data-prop="`${BLOG_INDEX}.author_label`">{{ blogIndex.author_label }}</editable-text> &nbsp;</span><editable-text data-prop="author">{{ pageData.author }}</editable-text></p>
                     </li>
                     <!--
                     <li class="list-inline-item">
@@ -26,9 +26,10 @@
                   </ul>
                 </div>
               </div>
-              <img v-if="pageData.featuredImg" :src="pageData.featuredImg.image" class="w-100 mb-xxl-11 mb-8"
-                :alt="pageData.featuredImg.image_alt" />
-              <div style="max-width: 900px; margin: 0 auto">
+              <img v-if="pageData.featuredImg?.image" :src="pageData.featuredImg.image" class="w-100 mb-xxl-11 mb-8"
+                :alt="pageData.featuredImg.image_alt"
+                data-editable="image" data-prop-src="featuredImg.image" data-prop-alt="featuredImg.image_alt" />
+              <div style="max-width: 900px; margin: 0 auto" data-editable="text" data-prop="@content">
                 <ContentDoc />
               </div>
             </article>
@@ -41,7 +42,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="blog-section">
-              <h2 class="blog-section-title">Recent Blog</h2>
+              <h2 class="blog-section-title" data-editable="text" :data-prop="`${BLOG_INDEX}.recent_posts_heading`">{{ blogIndex.recent_posts_heading }}</h2>
             </div>
           </div>
         </div>
@@ -81,6 +82,13 @@
   }
 
   const pageData = page.value;
+
+  // The labels live in the blog index, so their regions write to that file
+  const BLOG_INDEX = '@file[/content/blog/index.md]';
+  const blogIndex = await queryContent('blog')
+    .where({ _path: '/blog' })
+    .only(['recent_posts_heading', 'author_label'])
+    .findOne();
 
   const numRecentPosts = 3;
   const recommendedBlogPosts = await queryContent('blog')

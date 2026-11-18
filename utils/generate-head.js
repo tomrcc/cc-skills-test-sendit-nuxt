@@ -5,7 +5,7 @@ export default function (pageData, route) {
     const pageDescription = seo.page_description || siteData.description;
 
     const cannonical_url = siteData.BaseURL
-        + (`/${(seo.cannonical_url || route.href)}`.replace(/\/+/g, '/'));
+        + (`/${(seo.canonical_url || route.href)}`.replace(/\/+/g, '/'));
 
     const metaData = [
         {

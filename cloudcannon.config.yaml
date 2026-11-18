@@ -1,100 +1,765 @@
+timezone: Etc/UTC
 paths:
-  collections: content
-  data: data
   static: public
   uploads: public/images
+markdown:
+  engine: commonmark
+  options:
+    gfm: true
+    html: true
+    strikethrough: true
+    table: true
 collections_config:
-  data:
-    path: data/
-    disable_add: true
-    disable_add_folder: true
   pages:
     path: content
     glob:
-      - content/*.md
-    url: '/[slug]'
-    output: true
+      - "*.md"
+    url: /[slug]/
+    name: Pages
     icon: wysiwyg
+    description: Every page built from sections, including the home page.
+    disable_add_folder: true
+    create:
+      path: "[relative_base_path]/{title|slugify}.[ext]"
+    new_preview_url: /
     _enabled_editors:
       - visual
+      - data
     schemas:
-      page:
-        name: New Page
-        path: schemas/page.md
+      default:
+        path: .cloudcannon/schemas/page.md
+        name: Page
+        icon: wysiwyg
+    add_options:
+      - name: Page
+        schema: default
+        icon: wysiwyg
+    _inputs:
+      title:
+        type: text
+      content_blocks:
+        type: array
+        label: Page sections
+        options:
+          structures: _structures.content_blocks
   blog:
-    path: content/blog/
-    output: true
-    url: '/blog/[slug]'
+    path: content/blog
+    glob:
+      - "*.md"
+    url: /blog/[slug]/
+    name: Blog
+    icon: post_add
+    description: Blog posts, and the blog index page's intro and settings.
+    disable_add_folder: true
+    create:
+      path: "[relative_base_path]/{title|slugify}.[ext]"
+    new_preview_url: /blog/email-delivery-tips/
     _enabled_editors:
-      - content
       - visual
+      - content
+      - data
     schemas:
-      blog_post:
-        name: New Blog Post
-        path: schemas/post.md
-        hide_extra_inputs: false
-        remove_extra_inputs: false
+      default:
+        path: .cloudcannon/schemas/post.md
+        name: Blog Post
+        icon: post_add
+      blog_index:
+        path: .cloudcannon/schemas/blog-index.md
+        name: Blog Index
+        icon: view_list
+    add_options:
+      - name: Blog Post
+        schema: default
+        icon: post_add
+    _inputs:
+      title:
+        type: text
+      date:
+        type: datetime
+        instance_value: NOW
+        comment: Shown on the post
+      author:
+        type: text
+        comment: Author's name, shown on the post
+      tags:
+        type: multiselect
+        comment: The first two tags show on the post's card. Add new tags in Data → Tags.
+        options:
+          values: data.tags
+      thumbImg:
+        type: object
+        label: Thumbnail
+        options:
+          preview:
+            icon: image
+      thumbImg.image:
+        type: image
+        label: Thumbnail image
+        comment: Shown on blog listings
+        options:
+          width: 500
+          height: 413
+          resize_style: crop
+      thumbImg.image_alt:
+        type: text
+        label: Thumbnail alt text
+      featuredImg:
+        type: object
+        label: Featured image
+        options:
+          preview:
+            icon: image
+      featuredImg.image:
+        type: image
+        label: Featured image
+        comment: Shown at the top of the post
+        options:
+          width: 1296
+          resize_style: crop
+      featuredImg.image_alt:
+        type: text
+        label: Featured image alt text
+      description:
+        type: textarea
+        label: Intro text
+        comment: Shown under the title on the blog and tag pages
+      recent_posts_heading:
+        type: text
+        comment: Heading above the recent posts at the bottom of every post
+      author_label:
+        type: text
+        comment: Shown before the author's name on every post
+      pagination:
+        type: object
+        options:
+          preview:
+            icon: format_list_numbered
+      pagination.size:
+        type: number
+        label: Posts per page
+        options:
+          min: 1
+          step: 1
+  data:
+    path: data
+    glob:
+      - "*.json"
+    disable_url: true
+    name: Data
+    icon: settings
+    description: Navigation, footer, site details, theme colours and blog tags.
+    disable_add: true
+    disable_add_folder: true
+    disable_file_actions: true
+    _enabled_editors:
+      - data
+collection_groups:
+  - heading: Content
+    collections:
+      - pages
+      - blog
+  - heading: Settings
+    collections:
+      - data
+data_config:
+  nav:
+    path: data/nav.json
+  footer:
+    path: data/footer.json
+  site:
+    path: data/site.json
+  theme:
+    path: data/theme.json
+  tags:
+    path: data/tags.json
+_editables:
+  content:
+    bold: true
+    italic: true
+    link: true
+    strike: true
+    underline: true
+    format: p h2 h3 h4
+    bulletedlist: true
+    numberedlist: true
+    blockquote: true
+    code_inline: true
+    horizontalrule: true
+    image: true
+    removeformat: true
+    undo: true
+    redo: true
 _inputs:
-  date:
-    instance_value: now
-  title_suffix:
-    comment: Added at the end of the title and highlighted in a different color
-  pagination.data:
+  layout:
     hidden: true
-  pagination.alias:
+  _schema:
     hidden: true
-  pagination.size:
-    type: number
-  'social[*].icon':
+  permalink:
+    hidden: true
+  seo:
+    type: object
+    label: SEO
+    options:
+      preview:
+        icon: travel_explore
+  seo.page_description:
+    type: textarea
+    label: Meta description
+    comment: Defaults to the description in Data → Site
+  seo.canonical_url:
+    type: url
+    label: Canonical URL
+    comment: Defaults to this page's URL
+  seo.featured_image:
+    type: image
+    label: Social image
+    comment: Defaults to the image in Data → Site
+  seo.featured_image_alt:
+    type: text
+    label: Social image alt text
+  seo.author_twitter_handle:
+    type: text
+    label: Author Twitter handle
+    comment: Defaults to the Twitter handle in Data → Site
+  seo.open_graph_type:
     type: select
+    label: Open Graph type
+    comment: Defaults to Website
     options:
-      values:
-        - ph-facebook-logo
-        - ph-instagram-logo
-        - ph-twitter-logo
-        - ph-github-logo
-        - ph-youtube-logo
-  logo_url:
-    comment: Link for the logo in the top left of the footer
-  copyright:
-    comment: Automatically prefixed with the current year
-  isActive:
+      allow_empty: true
+      value_key: id
+      preview:
+        text:
+          - key: name
+      values: _select_data.open_graph_types
+  seo.no_index:
     type: switch
-  page_description:
-    comment: Defaults to the description set in the Site SEO data file
-  favicon_icon:
-    type: image
-    comment: For the shortcut icon meta tag
-  faivcon_image:
-    type: image
-    comment: For the icon meta tag
-  canonical_url:
-    comment: Defaults to the pages url
-  featured_image:
-    comment: Defaults to the image set in the Site SEO data file
-  thumb_image.image:
-    type: image
-    options:
-      width: 500
-      height: 413
-      resize_style: crop
-  featured_image.image:
-    type: image
-    options:
-      width: 1296
-      resize_style: crop
-  open_graph_type:
-    comment: Defaults to the type 'website'
-  author_twitter_handle:
-    comment: Defaults to the twitter site value set in the Site SEO data file
-  no_index:
-    type: checkbox
-    comment: >-
-      When selected this removes the page from your sitemap and adds the noindex
-      robots meta tag
+    label: Hide from search engines
+    comment: Adds a noindex robots meta tag
+_select_data:
+  social_icons:
+    - name: Facebook
+      id: ph-facebook-logo
+    - name: Instagram
+      id: ph-instagram-logo
+    - name: Twitter
+      id: ph-twitter-logo
+    - name: GitHub
+      id: ph-github-logo
+    - name: YouTube
+      id: ph-youtube-logo
+    - name: LinkedIn
+      id: ph-linkedin-logo
+  open_graph_types:
+    - name: Website
+      id: website
+    - name: Article
+      id: article
 _structures:
-  features:
+  content_blocks:
+    style: modal
+    values_from_glob:
+      - /components/**/*.cloudcannon.structure-value.yml
+  counter_numbers:
     values:
-      - value:
-          item: 
-          isActive: 
+      - label: Number
+        icon: pin
+        picker_preview:
+          text:
+            - Number
+          icon:
+            - pin
+        preview:
+          text:
+            - key: number
+            - Number
+          subtext:
+            - key: text
+          icon:
+            - pin
+        value:
+          prefix:
+          number: "300"
+          suffix:
+          text: Venture capital raised
+        _inputs:
+          prefix:
+            type: text
+            comment: Shown before the number, such as $
+          number:
+            type: text
+          suffix:
+            type: text
+            comment: Shown after the number, such as m or +
+          text:
+            type: text
+            label: Caption
+  testimonial_items:
+    values:
+      - label: Testimonial
+        icon: format_quote
+        picker_preview:
+          text:
+            - Testimonial
+          icon:
+            - format_quote
+        preview:
+          text:
+            - key: author
+            - Testimonial
+          subtext:
+            - key: designation
+          icon:
+            - format_quote
+          image:
+            - key: image
+        value:
+          image: /images/testimonial/logo-2.jpg
+          image_alt: Profile photo of the Head of Development
+          author: Sherlock Homes
+          designation: Head of Dev. at Company
+          message: Eget eu massa et consectetur. Mauris donec. Leo a, id sed duis proin sodales. Turpis viverra diam porttitor mattis morbi ac amet.
+        _inputs:
+          image:
+            type: image
+            label: Photo
+            options:
+              width: 80
+              height: 80
+              resize_style: crop
+          image_alt:
+            type: text
+            label: Photo alt text
+          author:
+            type: text
+            label: Name
+          designation:
+            type: text
+            label: Role
+          message:
+            type: textarea
+            label: Quote
+  about_hero_images:
+    values:
+      - label: Hero Image
+        icon: image
+        picker_preview:
+          text:
+            - Hero Image
+          icon:
+            - image
+        preview:
+          text:
+            - key: image_alt
+            - Hero Image
+          subtext:
+            - key: placement
+          icon:
+            - image
+          image:
+            - key: image
+        value:
+          image: /images/about/aboutfeature-two.jpg
+          image_alt: People working
+          placement: front_bottom
+        _inputs:
+          image:
+            type: image
+            options:
+              width: 450
+              height: 450
+              resize_style: crop
+          image_alt:
+            type: text
+            label: Image alt text
+          placement:
+            type: select
+            options:
+              value_key: id
+              preview:
+                text:
+                  - key: name
+              values:
+                - name: Front, bottom
+                  id: front_bottom
+                - name: Back, top right
+                  id: back_top_right
+                - name: Back, top left
+                  id: back_top_left
+  team_members:
+    values:
+      - label: Team Member
+        icon: person
+        picker_preview:
+          text:
+            - Team Member
+          icon:
+            - person
+        preview:
+          text:
+            - key: name
+            - Team Member
+          subtext:
+            - key: designation
+          icon:
+            - person
+          image:
+            - key: image
+        value:
+          name: Cody Fisher
+          designation: Co-Founder & CEO
+          image: /images/team/team-member-1.jpg
+          image_alt: "Team member: Cody Fisher"
+        _inputs:
+          name:
+            type: text
+          designation:
+            type: text
+            label: Role
+          image:
+            type: image
+            label: Photo
+            options:
+              width: 516
+              height: 579
+              resize_style: crop
+          image_alt:
+            type: text
+            label: Photo alt text
+  pricing_tiers:
+    values:
+      - label: Pricing Tier
+        icon: payments
+        picker_preview:
+          text:
+            - Pricing Tier
+          icon:
+            - payments
+        preview:
+          text:
+            - key: tier
+            - Pricing Tier
+          subtext:
+            - key: price
+          icon:
+            - payments
+        value:
+          tier: Free
+          highlight_tier: false
+          description: For starters Includes unlimited members
+          currency_symbol: $
+          price: "0"
+          has_discount: false
+          discount_price: "0"
+          features: []
+          button:
+            link: /signup
+            text: Try This Free
+        _inputs_from_glob:
+          - /.cloudcannon/inputs/description-html.cloudcannon.inputs.yml
+          - /.cloudcannon/inputs/button.cloudcannon.inputs.yml
+        _inputs:
+          tier:
+            type: text
+            label: Tier name
+          highlight_tier:
+            type: switch
+            label: Highlight this tier
+          currency_symbol:
+            type: text
+          price:
+            type: text
+          has_discount:
+            type: switch
+            label: Show a discount
+          discount_price:
+            type: text
+            label: Discounted price
+            comment: Shown in place of the price when Show a discount is on
+          features:
+            type: array
+            options:
+              structures: _structures.pricing_features
+  pricing_features:
+    values:
+      - label: Feature
+        icon: check_circle
+        picker_preview:
+          text:
+            - Feature
+          icon:
+            - check_circle
+        preview:
+          text:
+            - key: item
+            - Feature
+          icon:
+            - check_circle
+        value:
+          item: 1 Site Activation
+          active_feature: true
+        _inputs:
+          item:
+            type: text
+            label: Feature
+          active_feature:
+            type: switch
+            label: Included
+  faq_items:
+    values:
+      - label: Question
+        icon: help
+        picker_preview:
+          text:
+            - Question
+          icon:
+            - help
+        preview:
+          text:
+            - key: title
+            - Question
+          icon:
+            - help
+        value:
+          title: What if I unplug all selected apps at once?
+          description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim illo quasi quia doloremque dignissimos rerum perspiciatis, officiis optio natus beatae!
+        _inputs:
+          title:
+            type: text
+            label: Question
+          description:
+            type: html
+            label: Answer
+            options:
+              bold: true
+              italic: true
+              link: true
+              removeformat: true
+              undo: true
+              redo: true
+  terms_sections:
+    values:
+      - label: Section
+        icon: article
+        picker_preview:
+          text:
+            - Section
+          icon:
+            - article
+        preview:
+          text:
+            - key: heading
+            - Section
+          icon:
+            - article
+        value:
+          heading: Sendit Terms And Conditions
+          description: <p>By using Sendit, you agree to the terms and conditions listed on this page.</p><p>Sendit may change the terms on this page. We will take steps to notify you when this occurs, but you are responsible for staying up-to-date with these changes.</p>
+        _inputs:
+          heading:
+            type: text
+          description:
+            type: html
+            label: Content
+            options:
+              bold: true
+              italic: true
+              link: true
+              format: p h4
+              bulletedlist: true
+              numberedlist: true
+              removeformat: true
+              undo: true
+              redo: true
+  nav_links:
+    values:
+      - label: Link
+        icon: link
+        picker_preview:
+          text:
+            - Link
+          icon:
+            - link
+        preview:
+          text:
+            - key: text
+            - Link
+          subtext:
+            - key: link
+          icon:
+            - link
+        value:
+          link: /
+          text: Home
+        _inputs:
+          link:
+            type: url
+          text:
+            type: text
+  footer_sections:
+    values:
+      - label: Link column
+        icon: view_column
+        picker_preview:
+          text:
+            - Link column
+          icon:
+            - view_column
+        preview:
+          text:
+            - key: title
+            - Link column
+          icon:
+            - view_column
+        value:
+          title: Main Pages
+          links: []
+        _inputs:
+          title:
+            type: text
+          links:
+            type: array
+            options:
+              structures: _structures.nav_links
+  social_links:
+    values:
+      - label: Social link
+        icon: share
+        picker_preview:
+          text:
+            - Social link
+          icon:
+            - share
+        preview:
+          text:
+            - key: icon_alt
+            - Social link
+          subtext:
+            - key: link
+          icon:
+            - share
+        value:
+          link: https://www.facebook.com/
+          icon: ph-facebook-logo
+          icon_alt: Facebook
+        _inputs:
+          link:
+            type: url
+          icon:
+            type: select
+            comment: A Phosphor icon class. Type another `ph-*-logo` name from [phosphoricons.com](https://phosphoricons.com) to add one.
+            options:
+              allow_create: true
+              value_key: id
+              preview:
+                text:
+                  - key: name
+              values: _select_data.social_icons
+          icon_alt:
+            type: text
+            label: Network name
+            comment: Read out by screen readers
+file_config:
+  - glob: data/nav.json
+    _inputs:
+      $:
+        type: object
+        label: Navigation
+        options:
+          preview:
+            icon: menu
+      logo:
+        type: image
+      items:
+        type: array
+        label: Menu links
+        options:
+          structures: _structures.nav_links
+      button:
+        type: object
+        options:
+          preview:
+            icon: ads_click
+      button.link:
+        type: url
+      button.text:
+        type: text
+  - glob: data/footer.json
+    _inputs:
+      $:
+        type: object
+        label: Footer
+        options:
+          preview:
+            icon: bottom_navigation
+      logo:
+        type: image
+      copyright:
+        type: text
+        comment: Shown after "Copyright" and the current year
+      social:
+        type: array
+        label: Social links
+        options:
+          structures: _structures.social_links
+      sections:
+        type: array
+        label: Link columns
+        options:
+          structures: _structures.footer_sections
+  - glob: data/site.json
+    _inputs:
+      $:
+        type: object
+        label: Site
+        options:
+          preview:
+            icon: public
+      BaseURL:
+        type: url
+        label: Site URL
+        comment: The live site's address, used for canonical links
+      site_title:
+        type: text
+        comment: Added after every page title
+      description:
+        type: textarea
+        comment: The default meta description
+      image:
+        type: image
+        label: Default social image
+      twitter_image:
+        type: image
+        label: Default Twitter image
+      twitter_site:
+        type: text
+        label: Twitter handle
+      favicon_icon:
+        hidden: true
+      favicon_image:
+        hidden: true
+  - glob: data/theme.json
+    _inputs:
+      $:
+        type: object
+        label: Theme
+        options:
+          preview:
+            icon: palette
+      primary_color:
+        type: color
+      secondary_color:
+        type: color
+      anchor_color:
+        type: color
+      background_effects_color:
+        type: color
+  - glob: data/tags.json
+    _inputs:
+      $:
+        type: array
+        label: Tags
+        comment: Tags editors can pick on blog posts. Each tag gets a page at /tags/<tag>/.
+      $[*]:
+        type: text
+        label: Tag

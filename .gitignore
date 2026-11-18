@@ -95,3 +95,7 @@ sw.*
 .content
 
 temp
+.cloudcannon/migration/*.schema.json
+
+# Generated from data/theme.json by scripts/generate-theme.js
+assets/style/_theme.scss

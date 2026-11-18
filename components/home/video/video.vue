@@ -1,15 +1,18 @@
 <template>
-  <section class="video pb-xxl-22 pb-lg-18 pb-12" :data-cms-bind="dataBinding">
+  <section class="video pb-xxl-22 pb-lg-18 pb-12">
     <div class="container">
       <div class="row">
         <div class="col-lg-10 mx-auto">
           <div class="banner">
             <img format="webp" style= "border-radius: 20px;"
-              :src="block.image"
+              :src="image"
               class="w-100"
-              alt="banner-image"
+              :alt="image_alt"
               loading="lazy"
-              v-if="block.image"
+              v-if="image"
+              data-editable="image"
+              data-prop-src="image"
+              data-prop-alt="image_alt"
             />
             <div class="effect-one">
             </div>
@@ -19,7 +22,7 @@
               class="video-iframe d-flex align-items-center justify-content-center"
             >
               <div class="video-icon me-sm-9 me-8">
-                <a class="popup-vimeo" id="popup-vimeo-home" :href="block.video_url">
+                <a class="popup-vimeo" id="popup-vimeo-home" :href="video_url">
                   <svg
                     width="28"
                     height="32"
@@ -44,8 +47,9 @@
 
 <script>
    export default {
+      inheritAttrs: false,
       props: [
-      'block','dataBinding'
+         'image', 'image_alt', 'video_url'
       ]
    }
 </script>

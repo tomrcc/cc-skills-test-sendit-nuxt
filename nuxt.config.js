@@ -1,5 +1,16 @@
+import { readdirSync } from 'node:fs'
 
 export default defineNuxtConfig({
+  hooks: {
+    // Pages editors create are built even before anything links to them
+    'prerender:routes'({ routes }) {
+      for (const file of readdirSync('content')) {
+        if (file.endsWith('.md')) {
+          routes.add(file === 'index.md' ? '/' : `/${file.replace(/\.md$/, '')}`)
+        }
+      }
+    }
+  },
   app: {
     head: {
       title: 'Sendit',
@@ -33,6 +44,11 @@ export default defineNuxtConfig({
   },
   content: {
     documentDriven: true
+  },
+  vue: {
+    compilerOptions: {
+      isCustomElement: (tag) => tag.startsWith('editable-')
+    }
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [

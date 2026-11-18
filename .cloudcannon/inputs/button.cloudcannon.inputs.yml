@@ -1,0 +1,11 @@
+button:
+  type: object
+  options:
+    preview:
+      icon: ads_click
+button.text:
+  type: text
+  label: Button text
+button.link:
+  type: url
+  label: Button link

@@ -1,8 +1,7 @@
 ---
 title: Home
-layout: custom
 content_blocks:
-  - _bookshop_name: home/hero
+  - _type: home/hero
     title: Beautiful email campaigns
     description: With Sendit, you can quickly create beautiful rich emails that capture a reader's attention, engage them, and convert them into customers.
     image: /images/hero/hero-image-2.png
@@ -11,31 +10,35 @@ content_blocks:
       text: Try This Free
       link: /signup
 
-  - _bookshop_name: general/counter
+  - _type: general/counter
     title: Scale your
     title_suffix: Business
     description: We have an extensive library of pre-written sales emails, proven marketing templates, and more to get you started on your next project.
-    alternateStyle: false
+    alternate_style: false
     numbers:
       - prefix: $
-        number: 200
+        number: "200"
         suffix: m
         text: Venture capital raised
-      - number: 2016
+      - prefix:
+        number: "2016"
+        suffix:
         text: Established in
-      - number: 40
+      - prefix:
+        number: "40"
         suffix: +
         text: Amazing team members
-      - number: 4322
+      - prefix:
+        number: "4322"
         suffix: +
         text: Active users and growing
 
-  - _bookshop_name: home/video
+  - _type: home/video
     image: /images/video/video-thum.jpg
     image_alt: Thumbnail for video
     video_url: https://vimeo.com/45830194
 
-  - _bookshop_name: general/header
+  - _type: general/header
     title: "Sendit "
     title_suffix: Features
     remove_top_padding: true
@@ -44,7 +47,7 @@ content_blocks:
       email content creation, dynamic personalization, and customer
       segmentation.
 
-  - _bookshop_name: general/feature
+  - _type: general/feature
     image: /images/feature/feature-card-one.png
     image_alt: Message inbox
     title: "Email Campaign in one minute"
@@ -54,7 +57,7 @@ content_blocks:
       text: Try This Free
     reversed: false
 
-  - _bookshop_name: general/feature
+  - _type: general/feature
     image: /images/feature/feature-card-two.png
     image_alt: Visitor chart
     title: "See every Lead in one Place"
@@ -64,7 +67,7 @@ content_blocks:
       text: Try This Free
     reversed: true
 
-  - _bookshop_name: general/feature
+  - _type: general/feature
     image: /images/feature/feature-card-three.png
     image_alt: File upload
     title: "100% free uploads"
@@ -74,7 +77,7 @@ content_blocks:
       text: Try This Free
     reversed: false
 
-  - _bookshop_name: general/testimonial
+  - _type: general/testimonial
     title: Build relationships that
     title_suffix: last
     description: Customers from around the world are building game changing email marketing campaigns.
@@ -96,18 +99,4 @@ content_blocks:
         author: Simon Moriarty
         designation: Head of Marketing at Pinnacle Mines
         message: I can't imagine life without Sendit now, I have no idea how we were surviving before.
-# content_blocks:
-#   - _bookshop_name: home/hero
-#     title: Beautiful email campaigns
-#     description: With Sendit, you can quickly create beautiful rich emails that capture a reader's attention, engage them, and convert them into customers.
-#     image: /images/hero/hero-image-2.png
-#     image_alt: Reports dashboard
-#     button:
-#       text: Try This Free
-#       link: /signup
-#   - _bookshop_name: home/video
-#     image: /images/video/video-thum.jpg
-#     image_alt: Thumbnail for video
-#     video_url: https://vimeo.com/45830194
-
 ---

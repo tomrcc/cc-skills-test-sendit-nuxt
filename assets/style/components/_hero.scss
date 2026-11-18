@@ -131,6 +131,11 @@
     width: 100%;
     height: 100%;
 
+    // Array wrapper for the images; keeps them positioned against the banner
+    &-images {
+      display: contents;
+    }
+
     .image-one,
     .image-two,
     .image-three {

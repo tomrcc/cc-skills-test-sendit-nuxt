@@ -1,0 +1,36 @@
+label: Home Video
+description: Home Video section
+icon: videocam
+picker_preview:
+  text:
+    - Home Video
+  icon:
+    - videocam
+preview:
+  text:
+    - key: image_alt
+    - Home Video
+  subtext:
+    - Home Video
+  icon:
+    - videocam
+  image:
+    - key: image
+value:
+  _type: home/video
+  image: /images/video/video-thum.jpg
+  image_alt: Thumbnail for video
+  video_url: https://vimeo.com/45830194
+_inputs:
+  _type:
+    hidden: true
+  image:
+    type: image
+    label: Video thumbnail
+  image_alt:
+    type: text
+    label: Thumbnail alt text
+  video_url:
+    type: url
+    label: Video URL
+    comment: A Vimeo or YouTube link, opened in a popup

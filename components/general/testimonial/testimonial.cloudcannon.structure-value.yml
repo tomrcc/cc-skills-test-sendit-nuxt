@@ -1,0 +1,34 @@
+label: Testimonial
+description: Testimonial section
+icon: 3p
+picker_preview:
+  text:
+    - Testimonial
+  icon:
+    - 3p
+preview:
+  text:
+    - key: title
+    - Testimonial
+  subtext:
+    - Testimonial
+  icon:
+    - 3p
+value:
+  _type: general/testimonial
+  title: We Felt Proud When People Love our
+  title_suffix: Product
+  description: We believe that a good email marketing strategy is the key to growth. So we’re helping you grow your business with tools and resources that make email marketing easy.
+  slider: []
+_inputs_from_glob:
+  - /.cloudcannon/inputs/heading.cloudcannon.inputs.yml
+  - /.cloudcannon/inputs/title-suffix.cloudcannon.inputs.yml
+  - /.cloudcannon/inputs/description-html.cloudcannon.inputs.yml
+_inputs:
+  _type:
+    hidden: true
+  slider:
+    type: array
+    label: Testimonials
+    options:
+      structures: _structures.testimonial_items

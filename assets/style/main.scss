@@ -17,6 +17,13 @@
 
 @import 'components/privacy/privacy';
 
+// Visual Editor only: an empty list still needs a box for the "Add item" button
+.cms-editor-active [data-editable="array"]:empty {
+  display: block;
+  min-height: 3rem;
+  min-width: 6rem;
+}
+
 // @import "components/navbar";
 // @import "components/hero";
 // @import "components/about";

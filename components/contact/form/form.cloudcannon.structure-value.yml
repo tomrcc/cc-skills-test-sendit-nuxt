@@ -1,0 +1,117 @@
+label: Contact Form
+description: Contact details and form section
+icon: check_box
+picker_preview:
+  text:
+    - Contact Form
+  icon:
+    - check_box
+preview:
+  text:
+    - key: form.heading
+    - Contact Form
+  subtext:
+    - Contact Form
+  icon:
+    - check_box
+value:
+  _type: contact/form
+  address:
+    heading: Office Address
+    address: 1421 San Pedro St, Los Angeles, CA 90015
+  phone:
+    heading: Phone
+    cell: (546) 232 - 9872
+  email:
+    heading: Email
+    email: hello@example.com
+  form:
+    heading: Say Hello
+    fullname:
+      heading: Full Name
+      placeholder: Enter First Name
+    phone_number:
+      heading: Phone number
+      placeholder: Enter Phone Number
+    email:
+      heading: Email Address
+      placeholder: Enter Email Address
+    message:
+      heading: Your Messages
+      placeholder: Any Message
+    submit_button:
+      text: Send message
+_inputs:
+  _type:
+    hidden: true
+  address:
+    type: object
+    options:
+      preview:
+        icon: location_on
+  address.heading:
+    type: text
+  address.address:
+    type: text
+  phone:
+    type: object
+    options:
+      preview:
+        icon: call
+  phone.heading:
+    type: text
+  phone.cell:
+    type: text
+    label: Phone number
+  email:
+    type: object
+    options:
+      preview:
+        icon: mail
+  email.heading:
+    type: text
+  email.email:
+    type: email
+    label: Email address
+  form:
+    type: object
+    options:
+      preview:
+        icon: edit_note
+  form.heading:
+    type: text
+  form.fullname:
+    type: object
+    label: Full name field
+    options:
+      preview:
+        icon: person
+  form.phone_number:
+    type: object
+    label: Phone number field
+    options:
+      preview:
+        icon: call
+  form.email:
+    type: object
+    label: Email field
+    options:
+      preview:
+        icon: mail
+  form.message:
+    type: object
+    label: Message field
+    options:
+      preview:
+        icon: chat
+  form.submit_button:
+    type: object
+    options:
+      preview:
+        icon: send
+  heading:
+    type: text
+  placeholder:
+    type: text
+  text:
+    type: text

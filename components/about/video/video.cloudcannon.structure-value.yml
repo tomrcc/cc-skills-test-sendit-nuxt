@@ -1,0 +1,51 @@
+label: About Video
+description: About Video section
+icon: play_circle
+picker_preview:
+  text:
+    - About Video
+  icon:
+    - play_circle
+preview:
+  text:
+    - key: title
+    - About Video
+  subtext:
+    - About Video
+  icon:
+    - play_circle
+  image:
+    - key: video.image
+value:
+  _type: about/video
+  title: We Love our works
+  description: Our team has decades of experience working with email marketing campaigns and we’re passionate about helping you connect with your customers.
+  button:
+    link: https://www.linkedin.com/
+    text: Follow on Linkedin
+  video:
+    image: /images/works/banner.jpg
+    image_alt: Placeholder image for the video
+    link: https://vimeo.com/45830194
+_inputs_from_glob:
+  - /.cloudcannon/inputs/heading.cloudcannon.inputs.yml
+  - /.cloudcannon/inputs/description-html.cloudcannon.inputs.yml
+  - /.cloudcannon/inputs/button.cloudcannon.inputs.yml
+_inputs:
+  _type:
+    hidden: true
+  video:
+    type: object
+    options:
+      preview:
+        icon: smart_display
+  video.image:
+    type: image
+    label: Video thumbnail
+  video.image_alt:
+    type: text
+    label: Thumbnail alt text
+  video.link:
+    type: url
+    label: Video URL
+    comment: A Vimeo or YouTube link, opened in a popup

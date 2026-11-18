@@ -1,0 +1,27 @@
+label: Terms and Conditions
+description: Long-form sections with a side menu
+icon: gavel
+picker_preview:
+  text:
+    - Terms and Conditions
+  icon:
+    - gavel
+preview:
+  text:
+    - key: terms_and_conditions[0].heading
+    - Terms and Conditions
+  subtext:
+    - Terms and Conditions
+  icon:
+    - gavel
+value:
+  _type: privacy/terms-and-conditions
+  terms_and_conditions: []
+_inputs:
+  _type:
+    hidden: true
+  terms_and_conditions:
+    type: array
+    label: Sections
+    options:
+      structures: _structures.terms_sections

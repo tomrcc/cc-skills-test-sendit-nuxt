@@ -1,0 +1,89 @@
+label: Login
+description: Login form section
+icon: login
+picker_preview:
+  text:
+    - Login
+  icon:
+    - login
+preview:
+  text:
+    - key: title
+    - Login
+  subtext:
+    - Login
+  icon:
+    - login
+value:
+  _type: general/login
+  title: Log In
+  fullname:
+    heading: Full Name
+    placeholder: Your Name
+  email:
+    heading: Email Address
+    placeholder: Your Email
+  checkbox_text: Remember Me
+  forgot_password_button:
+    text: Forget Password
+    link: "#"
+  log_in_button:
+    text: Log In
+  divider_text: or
+  google_button_text: Sign In with Google
+  facebook_button_text: Sign In with FB
+  sign_up_button:
+    link: /signup
+    text: Create an Account
+_inputs:
+  _type:
+    hidden: true
+  title:
+    type: text
+  fullname:
+    type: object
+    label: Full name field
+    options:
+      preview:
+        icon: person
+  email:
+    type: object
+    label: Email field
+    options:
+      preview:
+        icon: mail
+  heading:
+    type: text
+  placeholder:
+    type: text
+  checkbox_text:
+    type: text
+    label: Checkbox text
+  forgot_password_button:
+    type: object
+    options:
+      preview:
+        icon: key
+  log_in_button:
+    type: object
+    options:
+      preview:
+        icon: login
+  sign_up_button:
+    type: object
+    options:
+      preview:
+        icon: how_to_reg
+  text:
+    type: text
+  link:
+    type: url
+  divider_text:
+    type: text
+    label: Divider text
+  google_button_text:
+    type: text
+    label: Google button text
+  facebook_button_text:
+    type: text
+    label: Facebook button text

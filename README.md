@@ -20,17 +20,20 @@ Sendit is a polished marketing website template for Nuxt. Browse through a [live
 
 Sendit is built with [Nuxt 3](https://nuxtjs.org/).
 
-Components are built with [Vue.js](https://vuejs.org/) using the [Composition API](https://vuejs.org/guide/introduction.html#composition-api), and are structured using [Bookshop](https://github.com/cloudcannon/bookshop).
+Components are built with [Vue.js](https://vuejs.org/) using the [Composition API](https://vuejs.org/guide/introduction.html#composition-api). Page sections are listed in `cloudcannon/componentMap.ts`, keyed by the `_type` each section has in content. Inside the CloudCannon Visual Editor, `plugins/cloudcannon.client.ts` loads `cloudcannon/registerComponents.ts`, which registers every component in that map so edits re-render it.
 
 This project uses the [Nuxt Content module](https://content.nuxtjs.org/) for handling Markdown content, with [Document-driven mode](https://content.nuxtjs.org/guide/writing/document-driven) for routing and for fetching page data.
 
 ## Setup
 
-Clone this repository to your machine. The relevant build scripts can be found in the `package.json`:
+Clone this repository to your machine. The site builds on Node 18 (`.nvmrc`). The relevant build scripts can be found in the `package.json`; `dev`, `generate` and `build` first write the theme colours from `data/theme.json` to `assets/style/_theme.scss`:
 
 ```bash
+# use the Node version in .nvmrc
+$ nvm use
+
 # install dependencies
-$ npm install
+$ npm ci
 
 # serve with hot reload at localhost:3000
 $ npm run dev
@@ -50,7 +53,7 @@ Sendit is set up for adding, updating and removing pages, components, posts, com
 
 ### Components
 * Pages are built using Vue components.
-* Components are structured using the [Bookshop](https://github.com/cloudcannon/bookshop) system.
+* Each section component has a `*.cloudcannon.structure-value.yml` beside it, which defines its fields in CloudCannon.
 
 ### Pages
 * Set up for live editing in CloudCannon's Visual Editor.

@@ -1,7 +1,11 @@
 {
-	"ssg": "nuxtjs",
-	"build_configuration": {
-	  "build_command": "npm run generate",
-	  "output_path": "dist"
-	}
+  "ssg": "nuxtjs",
+  "mode": "hosted",
+  "build": {
+    "install_command": "npm ci",
+    "build_command": "npm run generate",
+    "output_path": ".output/public",
+    "node_version": "file",
+    "preserved_paths": "node_modules/,.nuxt/"
+  }
 }
