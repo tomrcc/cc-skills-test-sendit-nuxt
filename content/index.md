@@ -5,7 +5,7 @@ seo:
   no_index: false
 content_blocks:
   - _type: home/hero
-    title: Beautiful email campaignsasd
+    title: Beautiful email campaigns zz
     description: With Sendit, you can quickly create beautiful rich emails that
       capture a reader's attention, engage them, and convert them into
       customers.
@@ -42,7 +42,7 @@ content_blocks:
     image_alt: Thumbnail for video
     video_url: https://vimeo.com/45830194
   - _type: general/header
-    title: 'Sendit '
+    title: Sendit
     title_suffix: Features
     description: Our platform offers the most advanced features including automated
       email content creation, dynamic personalization, and customer
