@@ -84,7 +84,7 @@
   const pageData = page.value;
 
   // The labels live in the blog index, so their regions write to that file
-  const BLOG_INDEX = '@file[/content/blog/index.md]';
+  const BLOG_INDEX = '@file[/content/blog/index]';
   const blogIndex = await queryContent('blog')
     .where({ _path: '/blog' })
     .only(['recent_posts_heading', 'author_label'])

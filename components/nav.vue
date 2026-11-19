@@ -101,6 +101,10 @@
                </div>
             </div>
          </nav>
+         <!-- TEST FIXTURE: remove after the navigation test -->
+         <NuxtLink to="/about/" style="position:fixed;left:8px;bottom:8px;z-index:9999;background:#ff0;color:#000;padding:6px 10px;">
+            Test link ({{ clientNavs }})
+         </NuxtLink>
       </header>
 </template>
 
@@ -108,6 +112,11 @@
 import navData from "../data/nav.json";
 
 const nav = navData;
+
+// TEST FIXTURE: counts client-side route changes; a full page load resets it to 0
+const route = useRoute();
+const clientNavs = ref(0);
+watch(() => route.path, () => clientNavs.value++);
 
 const NAV_ITEM_BLUEPRINT = `<li class="nav-item" data-editable="array-item"><a class="nav-link"><editable-text data-prop="text"></editable-text></a></li>`;
 </script>
